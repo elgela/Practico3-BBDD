@@ -13,12 +13,13 @@
         <tr>
             <?php
             foreach ($pagos as $pago) {
-                echo "<td>$pago->deudor</td>
-                    <td>$pago->cuota</td>
-                    <td>$pago->cuota_capital</td>
-                    <td>$pago->fecha_pago</td>";
-                echo '</tr>';
-            }
             ?>
+                <td><?php echo $pago->deudor ?></td>
+                <td><?php echo $pago->cuota ?></td>
+                <td><?php echo $pago->monto ?></td>
+                <td><?php echo $pago->fecha_pago ?></td>
+        </tr>
+            <?php } ?>
     </tbody>
 </table>
+

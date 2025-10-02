@@ -14,6 +14,9 @@ switch ($params[0]) {
     case 'home':
         showHome();
         break;
+    case 'add':
+        addPay();
+        break;
     default:
         echo 'error!';
         break;

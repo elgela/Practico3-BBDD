@@ -17,3 +17,14 @@ function getTablaPagos() {
     return $pagos;
 }
 $pagos = getTablaPagos();
+
+function insertPays($deudor, $cuota, $monto, $fecha_pago) {
+    // 1. abro conexión DB
+    $db = conection();
+
+    // 2. envio consulta
+    $query = $db->prepare("INSERT INTO pagos(deudor, cuota, monto, fecha_pago) VALUES (?,?,?,?)");
+
+    $query->execute([$deudor, $cuota, $monto, $fecha_pago]);
+
+}
