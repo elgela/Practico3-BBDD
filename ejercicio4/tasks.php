@@ -22,7 +22,7 @@ function addPay() {
         echo 'Falta ingresar datos';
         die();
     }
-    $id = insertPays($deudor, $cuota, $monto, $fecha_pago);
+    insertPays($deudor, $cuota, $monto, $fecha_pago);
 
     header('Location: home');
 }
