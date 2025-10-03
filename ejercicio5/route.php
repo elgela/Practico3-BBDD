@@ -1,6 +1,7 @@
 <?php
-require_once 'db.php';
-require_once 'tasks.php';
+require_once './app/db.php';
+require_once './app/tasks.php';
+require_once './templates/tabla.php';
 
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
@@ -14,11 +15,14 @@ switch ($params[0]) {
     case 'home':
         showHome();
         break;
-    case 'nombre':
-
+    case 'alta':
+        addStuff();
         break;
-    case 'profesor':
-
+    case 'baja':
+        deleteStuff($id);
+        break;
+    case 'modificar':
+        updateStuff($id);
         break;
     default:
         echo 'error!';
