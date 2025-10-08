@@ -1,5 +1,5 @@
 <?php
-require_once 'db.php';
+// require_once 'db.php';
 require_once 'templates/form_add.php';
 require_once 'templates/tabla.php';
 
@@ -14,16 +14,24 @@ function showStuff() {
 }
 
 function addStuff() {
-        // TODO: validacion de datos
-    if (isset($_POST['nombre'], ($_POST['profesor']))) {
+    // TODO: validacion de datos
+    if (isset($_POST['nombre'], $_POST['profesor']) && !empty($_POST['nombre'])) {
         // obtengo los datos del usuario
         $nombre = $_POST['nombre'];
         $profesor = $_POST['profesor'];
         // inserto en la DB
-        echo 'Se agregó con éxito';
+        insertStuff($nombre, $profesor);
+        header('Location: ' . BASE_URL);
+    } else {
+        echo 'Error!';
     }
-    insertStuff($nombre, $profesor);
+}
 
-    header('Location: home');
+function renewStuff($id) {
+    var_dump($id);
+}
 
+function removeStuff($id) {
+    deleteStuff($id);
+    header('Location: ' . BASE_URL);
 }

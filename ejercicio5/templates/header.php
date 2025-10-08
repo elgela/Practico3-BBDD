@@ -19,7 +19,7 @@
                     <a class="nav-link active" aria-current="page" href="home">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="formAdd.php">Materia</a>
+                    <a class="nav-link" href="#">Materia</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Profesor</a>

@@ -9,9 +9,11 @@ if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 }
 
-// home        ->        showHome();
-// agregar     ->        addStuff();
+// home           ->        showHome();
+// agregar        ->        addStuff();
+// eliminar/:ID   ->      removeStuff();
 
+// parsea para separar acción real de parametros
 $params = explode('/', $action);
 switch ($params[0]) {
     case 'home':
@@ -21,10 +23,10 @@ switch ($params[0]) {
         addStuff();
         break;
     case 'modificar':
-        updateStuff($id);
+        renewStuff($params[1]);
         break;
-    case 'baja':
-        deleteStuff($id);
+    case 'eliminar':
+        removeStuff($params[1]);
         break;
     default:
         echo 'error!';

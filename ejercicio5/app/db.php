@@ -35,7 +35,7 @@ function updateStuff($id) {
     $db = conection();
 
     // 2. envio consulta y obtengo resultados
-    $query = $db->prepare("UPDATE materia SET nombre='?',profesor='?' WHERE id = ?");
+    $query = $db->prepare("UPDATE materia SET profesor = ? WHERE materia.id = ?");
     $query->execute([$id]);
 
 }
@@ -46,7 +46,12 @@ function deleteStuff($id) {
     $db = conection();
 
     // 2. envio consulta y obtengo resultados
-    $query = $db->prepare("DELETE FROM materia WHERE id = ?");
+    $query = $db->prepare("DELETE FROM materia WHERE materia.id = ?");
     $query->execute([$id]);
 
 }
+
+// function searchStuff() {
+//     $db = conection();
+//     $query = $db->prepare("SELECT * FROM materia WHERE anios")
+// }
