@@ -13,10 +13,12 @@
         <button type="submit">Buscar <input type="text" name="search" id=""></button>
         <tr>
             <?php
-            foreach ($materias as $materia) {
+            foreach  ($materias as $materia) {
             ?>
-                <td style='padding:5px;text-align:center'><?php echo $materia->nombre ?></td>
+                <td style='padding:5px;text-align:center'><?php echo $materia->nombre_materia ?></td>
                 <td style='padding:5px;text-align:center'><?php echo $materia->profesor ?></td>
+                <td style='padding:5px;text-align:center'><?php echo $materia->nombre_carrera ?></td>
+                <td style='padding:5px;text-align:center'><?php echo $materia->anios ?></td>
                 <td><a href="modificar/<?php echo $materia->id ?>" type="button" class="btn btn-warning">Modificar</a></td>
                 <td><a href="eliminar/<?php echo $materia->id ?>" type="button" class="btn btn-danger">Eliminar</a></td>
         </tr>

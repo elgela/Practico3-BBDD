@@ -9,7 +9,7 @@ function getStuff() {
     $db = conection();
 
     // 2. envio consulta y obtengo resultados
-    $query = $db->prepare("SELECT * FROM materia");
+    $query = $db->prepare("SELECT * FROM materia INNER JOIN carrera ON materia.id_carrera = carrera.id");
     $query->execute();
 
     // 3. obtengo los datos que arroja la query
@@ -19,25 +19,32 @@ function getStuff() {
 $materias = getStuff();
 
 // inserta en la base de datos
-function insertStuff($nombre, $profesor) {
+function insertStuff($nombre_materia, $profesor, $nombre_carrera, $anios) {
     // 1. abro conexion a la DB
     $db = conection();
 
     // 2. envio consulta y obtengo resultados
-    $query = $db->prepare("INSERT INTO materia(nombre, profesor) VALUES (?,?)");
-    $query->execute([$nombre, $profesor]);
+    $query = $db->prepare("INSERT INTO materia(nombre, profesor, carrera, anios) VALUES (?,?,?,?)");
+    $query->execute([$nombre_materia, $profesor, $nombre_carrera, $anios]);
 
 }
 
+function getStuffById($id) {
+    $db = conection();
+    $query = $db->prepare("SELECT id FROM materia WHERE materia.id = ?");
+    $query->execute([$id]);
+    return $id;
+}
+
 // actualizar
-function updateStuff($id) {
+function conectStuffById($id) {
     // 1. abro conexion a la DB
     $db = conection();
 
     // 2. envio consulta y obtengo resultados
-    $query = $db->prepare("UPDATE materia SET profesor = ? WHERE materia.id = ?");
+    $query = $db->prepare("UPDATE id FROM materia WHERE materia.id = ?");
     $query->execute([$id]);
-
+    return $id;
 }
 
 // eliminar
