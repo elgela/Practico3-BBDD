@@ -16,7 +16,7 @@
             ?>
                 <td><?php echo $pago->deudor ?></td>
                 <td><?php echo $pago->cuota ?></td>
-                <td><?php echo $pago->monto ?></td>
+                <td><?php echo $pago->cuota_capital ?></td>
                 <td><?php echo $pago->fecha_pago ?></td>
         </tr>
             <?php } ?>
