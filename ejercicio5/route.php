@@ -19,7 +19,7 @@ switch ($params[0]) {
     case 'home':
         showHome();
         break;
-    case 'agregar':
+    case 'add':
         addStuff();
         break;
     case 'modificar':

@@ -5,40 +5,39 @@ require_once 'templates/tabla.phtml';
 
 
 function showHome() {
-    showStuff();
+    require_once 'templates/header.phtml';
+    // $materias = getStuff();
+    require_once 'templates/footer.phtml';
+    // showStuff();
 }
 
-function showStuff() {
-    require_once 'templates/header.phtml';
-    $materias = getStuff();
-    require_once 'templates/footer.phtml';
-}
+// function showStuff() {
+// }
 
 function addStuff() {
     // TODO: validacion de datos
-    if (isset($_POST['nombre'], $_POST['profesor'], $_POST['carrera'], $_POST['anios'], $_POST['id']) && !empty($_POST['nombre'])) {
+    if (isset($_POST['nombre_materia'], $_POST['profesor'], $_POST['nombre_carrera'], $_POST['anios']) && !empty($_POST['nombre_materia'])) {
         // obtengo los datos del usuario
-        $id = $_POST['id'];
-        $nombre_materia = $_POST['nombre'];
+        $nombre_materia = $_POST['nombre_materia'];
         $profesor = $_POST['profesor'];
-        $nombre_carrera = $_POST['carrera'];
+        $nombre_carrera = $_POST['nombre_carrera'];
         $anios = $_POST['anios'];
         // inserto en la DB
-        insertStuff($id, $nombre_materia, $profesor, $nombre_carrera, $anios);
+        insertStuff($nombre_materia, $profesor, $nombre_carrera, $anios);
         header('Location: ' . BASE_URL);
     } else {
-        echo 'Error!';
+        echo 'Debe ingresar datos!';
     }
 }
 
 function renewStuff($id) {
-    conectStuffById($id);
+    $data = getStuffById($id);
     showEditForm($id);
 }
 
 function showEditForm($id) {
-    $data = getStuffById($id);
     require_once 'templates/form_update.phtml';
+    
 }
 
 function removeStuff($id) {

@@ -24,14 +24,14 @@ function insertStuff($nombre_materia, $profesor, $nombre_carrera, $anios) {
     $db = conection();
 
     // 2. envio consulta y obtengo resultados
-    $query = $db->prepare("INSERT INTO materia(nombre, profesor, carrera, anios) VALUES (?,?,?,?)");
+    $query = $db->prepare("INSERT INTO materia(nombre_materia, profesor, nombre_carrera, anios) VALUES (?,?,?,?)");
     $query->execute([$nombre_materia, $profesor, $nombre_carrera, $anios]);
 
 }
 
 function getStuffById($id) {
     $db = conection();
-    $query = $db->prepare("SELECT id FROM materia WHERE materia.id = ?");
+    $query = $db->prepare("SELECT nombre_materia FROM materia WHERE materia.id = ?");
     $query->execute([$id]);
     return $id;
 }
@@ -42,7 +42,7 @@ function conectStuffById($id) {
     $db = conection();
 
     // 2. envio consulta y obtengo resultados
-    $query = $db->prepare("UPDATE id FROM materia WHERE materia.id = ?");
+    $query = $db->prepare("SELECT * FROM materia WHERE materia.id = ?");
     $query->execute([$id]);
     return $id;
 }
