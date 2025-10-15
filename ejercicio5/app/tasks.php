@@ -1,18 +1,11 @@
 <?php
-// require_once 'db.php';
-require_once 'templates/form_add.phtml';
-require_once 'templates/tabla.phtml';
-
 
 function showHome() {
     require_once 'templates/header.phtml';
+    require_once 'templates/form_add.phtml';
     // $materias = getStuff();
     require_once 'templates/footer.phtml';
-    // showStuff();
 }
-
-// function showStuff() {
-// }
 
 function addStuff() {
     // TODO: validacion de datos
@@ -26,12 +19,24 @@ function addStuff() {
         insertStuff($nombre_materia, $profesor, $nombre_carrera, $anios);
         header('Location: ' . BASE_URL);
     } else {
-        echo 'Debe ingresar datos!';
+        echo '<h1>Debe ingresar datos!</h1>';
     }
 }
 
+function showStuff() {
+    require_once 'templates/header.phtml';
+    $materias = getStuff();
+    require_once 'templates/tabla.phtml';
+    require_once 'templates/footer.phtml';
+}
+
+function showProfesor() {
+    require_once 'templates/header.phtml';
+    require_once 'templates/profesores.phtml';
+}
+
 function renewStuff($id) {
-    $data = getStuffById($id);
+    $materias = getStuffById($id);
     showEditForm($id);
 }
 

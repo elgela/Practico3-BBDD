@@ -20,13 +20,25 @@ $materias = getStuff();
 
 // inserta en la base de datos
 function insertStuff($nombre_materia, $profesor, $nombre_carrera, $anios) {
-    // 1. abro conexion a la DB
     $db = conection();
 
-    // 2. envio consulta y obtengo resultados
-    $query = $db->prepare("INSERT INTO materia(nombre_materia, profesor, nombre_carrera, anios) VALUES (?,?,?,?)");
-    $query->execute([$nombre_materia, $profesor, $nombre_carrera, $anios]);
+    // 1. Buscar si la carrera ya existe
+    $query = $db->prepare("SELECT id FROM carrera WHERE nombre_carrera = ?");
+    $query->execute([$nombre_carrera]);
+    $carrera = $query->fetch(PDO::FETCH_ASSOC);
 
+    if ($carrera) {
+        $id_carrera = $carrera['id'];
+    } else {
+        // 2. Insertar nueva carrera
+        $insertCarrera = $db->prepare("INSERT INTO carrera (nombre_carrera, anios) VALUES (?, ?)");
+        $insertCarrera->execute([$nombre_carrera, $anios]);
+        $id_carrera = $db->lastInsertId();
+    }
+
+    // 3. Insertar materia con el id_carrera
+    $insertMateria = $db->prepare("INSERT INTO materia (nombre_materia, profesor, id_carrera) VALUES (?, ?, ?)");
+    $insertMateria->execute([$nombre_materia, $profesor, $id_carrera]);
 }
 
 function getStuffById($id) {
@@ -53,12 +65,13 @@ function deleteStuff($id) {
     $db = conection();
 
     // 2. envio consulta y obtengo resultados
-    $query = $db->prepare("DELETE FROM materia WHERE materia.id = ?");
+    $query = $db->prepare("DELETE FROM materia WHERE materia.id_carrera = ?");
     $query->execute([$id]);
 
 }
 
-// function searchStuff() {
-//     $db = conection();
-//     $query = $db->prepare("SELECT * FROM materia WHERE anios")
-// }
+function searchStuff($id) {
+    $db = conection();
+    $query = $db->prepare("SELECT * FROM materia WHERE anios = ?");
+    $query->execute([$id]);
+}

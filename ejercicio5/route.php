@@ -28,6 +28,12 @@ switch ($params[0]) {
     case 'eliminar':
         removeStuff($params[1]);
         break;
+    case 'materias':
+        showStuff();
+        break;
+    case 'profesores':
+        showProfesor();
+        break;
     default:
         echo 'error!';
         break;
