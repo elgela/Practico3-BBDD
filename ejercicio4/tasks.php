@@ -24,5 +24,5 @@ function addPay() {
     }
     insertPays($deudor, $cuota, $monto, $fecha_pago);
 
-    header('Location: home');
+    header('Location: ' . BASE_URL);
 }
