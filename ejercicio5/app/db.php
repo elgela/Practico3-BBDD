@@ -41,6 +41,29 @@ function insertStuff($nombre_materia, $profesor, $nombre_carrera, $anios) {
     $insertMateria->execute([$nombre_materia, $profesor, $id_carrera]);
 }
 
+function updateStaff($nombre_materia, $profesor, $nombre_carrera, $anios) {
+    $db = conection();
+
+        // 1. Buscar si la carrera ya existe
+    $query = $db->prepare("UPDATE materia SET nombre_materia");
+    $query->execute([$nombre_carrera]);
+    $carrera = $query->fetch(PDO::FETCH_ASSOC);
+
+    if ($carrera) {
+        $id_carrera = $carrera['id'];
+    } else {
+        // 2. Insertar nueva carrera
+        $insertCarrera = $db->prepare("INSERT INTO carrera (nombre_carrera, anios) VALUES (?, ?)");
+        $insertCarrera->execute([$nombre_carrera, $anios]);
+        $id_carrera = $db->lastInsertId();
+    }
+
+    // 3. Insertar materia con el id_carrera
+    $insertMateria = $db->prepare("INSERT INTO materia (nombre_materia, profesor, id_carrera) VALUES (?, ?, ?)");
+    $insertMateria->execute([$nombre_materia, $profesor, $id_carrera]);
+
+}
+
 function getStuffById($id) {
     $db = conection();
     $query = $db->prepare("SELECT nombre_materia FROM materia WHERE materia.id = ?");
